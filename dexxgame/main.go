@@ -18,6 +18,12 @@ type Enemy_nul struct {
 	attack int
 }
 
+type Boss struct {
+	nom    string
+	hp     int
+	attack int
+}
+
 func statistiques(a Player) {
 	fmt.Printf("[ NAME : %s | HP : %d | ATTACK DMG : %d]\n\n", a.nom, a.hp, a.attack)
 }
@@ -35,6 +41,7 @@ func main() {
 
 	p1 := Player{input, 100, 50}
 	m1 := Enemy_nul{"Code-Crawler", 50, 10}
+	b1 := Boss{"Kernel-Panic", 100, 30}
 
 	statistiques(p1)
 
@@ -73,7 +80,7 @@ func main() {
 					2. FUIR
 					3. VOIR STAT
 					`)
-				for {
+				for p1.hp > 0 && m1.hp > 0{
 					var combat1 string
 					fmt.Scanln(&combat1)
 					if combat1 == "1" {
@@ -83,7 +90,7 @@ func main() {
 						fmt.Printf("\n\ncoup de spas12 dans sa mère : -%d hp pour le Code-Crawler\n\n", random_attack)
 						m1.hp = m1.hp - random_attack
 						time.Sleep(1000 * time.Millisecond)
-						if m1.hp < 0 {
+						if m1.hp <= 0 {
 							fmt.Printf("\n\nle Code-Crawler est mort BRAVO !\n\n")
 							break
 						} else {
@@ -99,7 +106,7 @@ func main() {
 
 							p1.hp = p1.hp - random_attack_m1
 
-							if p1.hp < 0 {
+							if p1.hp <= 0 {
 								fmt.Printf(`Vous êtes mort...`)
 								return
 							}
@@ -118,24 +125,114 @@ func main() {
 					}
 				}
 
+				for {
+					clearscreen()
+					fmt.Printf(`
+						Après avoir réduit le Code-Crawler en poussière binaire, %s s'enfonce plus profondément dans la forêt. Soudain, les arbres s'effacent pour laisser
+						place à une forteresse monolithique dont les tours semblent toucher le ciel de données.
+
+						En explorant les couloirs froids du château, tu tombes sur une porte cyclopéenne noyée dans un brouillard épais et glacial. Animé par un courage 
+						hors norme, tu franchis le seuil. Là, trônant au milieu d'une salle dévastée, se dresse l'entité suprême : le Kernel-Panic. L'air se fige,
+						 la réalité scintille... Que vas-tu faire ?
+					`)
+
+					var choix_final string
+					fmt.Printf(`
+							1. Lever la tête et affronter le Kernel-Panic
+							2. Baissez la tête et s'agenouiller devant lui
+							3. Fuir
+						`)
+					fmt.Scanln(&choix_final)
+
+					switch choix_final{
+
+					case "1":
+						fmt.Printf(`
+								1. ATTAQUER 
+								2. FUIR
+								3. VOIR STAT
+							`)
+
+							clearscreen()
+							attack_random := rand.Intn(50)
+							fmt.Printf("\n\ncoup de spas12 dans sa mère : -%d hp pour le Kernel-Boss\n\n", attack_random)
+							b1.hp = b1.hp - attack_random
+							if b1.hp <= 0 {
+								fmt.Printf(`
+										Félicitations ! le boss est vaincu, vous avancez et récuprez son épée, vous deven....
+										système corrompu.........
+										
+										quoi ? quelque chose est étrange, regardez vos statistiques...
+									`)
+								fmt.Printf(`
+										VOIR SES STATIS.....kern...TIQUES
+									`)
+								time.Sleep(2000 * time.Millisecond)
+								fmt.Printf(".")
+								time.Sleep(1000 * time.Millisecond)
+								fmt.Printf(".")
+								time.Sleep(1000 * time.Millisecond)
+								p1.nom = "Kernel-Boss"
+								statistiques(p1)
+							}
+							fmt.Printf("\n\nATTENTION, le Kernel-Boss attaque !\n\n")
+							attack_random_b1 := rand.Intn(30)
+							p1.hp = p1.hp - attack_random_b1
+							if p1.hp <= 0{
+								fmt.Printf("VOUS ÊTES MORT...")
+								return
+							}
+						
+							fmt.Printf(`
+									1. ATTAQUER 
+									2. FUIR
+									3. VOIR STAT
+								`)	
+					
+					case "2":
+						fmt.Printf("Tu à opté pour la fuite, sale lâche")
+						break
+
+					case "3":
+						statistiques(p1)
+						fmt.Printf(`
+								1. ATTAQUER 
+								2. FUIR
+								3. VOIR STAT
+							`)
+						continue
+					
+					defaut:
+						fmt.Printf("Veuillez entrez un choix valide !")
+						continue
+					}
+		
+				
+				}
+			
+			
 			case "2":
 				clearscreen()
 				fmt.Printf(`Vous vous laissez tombez en arrière et fermé les yeux...`)
 				return
+				
 			case "3":
 				clearscreen()
 				fmt.Printf(`Voici vos statistiques : 
-				
 				`)
 				statistiques(p1)
 			default:
 				fmt.Printf("Veuillez entrez un choix valide !")
 				continue
 			}
+		}
 
 		}
 	} else {
-		fmt.Println("FIN DE JEU")
+		fmt.Printf("FIN DU JEU !")
 	}
 
 }
+		
+
+
