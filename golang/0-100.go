@@ -9,12 +9,11 @@ func main() {
 
 	var secret int
 	secret = rand.Intn(100)
-	i := 0
 	var input int
 	fmt.Println("Commencez le jeu en trouvant le nombre aléatoire entre 0 - 100 (vous avez 10 essais ) BON CHANCE : ")
 	fmt.Scanln(&input)
 
-	for i <= 10 {
+	for i := 1; i <= 10; i++ {
 		if input == secret {
 			fmt.Printf("FELICITATIONS ! \n %d\n", secret)
 			fmt.Printf("Nombre d'essai : %d", i)
@@ -24,10 +23,14 @@ func main() {
 			fmt.Printf("Nombre d'essai : %d \n", i)
 			fmt.Scanln(&input)
 		} else {
-			fmt.Println("NON | plus bad")
+			fmt.Println("NON | plus bas")
 			fmt.Printf("Nombre d'essai : %d \n", i)
 			fmt.Scanln(&input)
 		}
-		i++
+
+		if i == 10 {
+			fmt.Println("PERDU !")
+		}
+
 	}
 }
