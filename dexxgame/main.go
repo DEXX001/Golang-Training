@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func structure_principal() {
+func main() {
 	fmt.Printf(" Bienvenue sur DEXX-Quest ! \n ------------------------ \n")
 	fmt.Printf("\n Entrez le nom de votre personnage : ")
 	var input string
