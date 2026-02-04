@@ -59,7 +59,7 @@ func main() {
 					fmt.Scanln(&combat1)
 					if combat1 == "1" {
 						clearscreen()
-						random_attack := rand.Intn(50)
+						random_attack := rand.Intn(p1.attack)
 						time.Sleep(2000 * time.Millisecond)
 						fmt.Printf("\n\ncoup de spas12 dans sa mère : -%d hp pour le Code-Crawler\n\n", random_attack)
 						m1.hp = m1.hp - random_attack
@@ -70,7 +70,7 @@ func main() {
 						} else {
 							fmt.Printf("\n\nATTENTION, le Code-Crawler attaque !\n\n")
 							time.Sleep(2000 * time.Millisecond)
-							random_attack_m1 := rand.Intn(30)
+							random_attack_m1 := rand.Intn(m1.attack)
 							fmt.Printf("\n\nAïe ! - %d hp\n\n", random_attack_m1)
 							fmt.Printf(`
 								1. ATTAQUER 
@@ -123,7 +123,7 @@ func main() {
 						clearscreen()
 						fmt.Printf("Bizarrement, le Kernel-Panic semble être un humain mais corrompu par un virus puissant... Mais rien à faire le combat va avoir lieu !\n")
 						time.Sleep(2000 * time.Millisecond)
-						attack_random := rand.Intn(50)
+						attack_random := rand.Intn(p1.attack)
 						fmt.Printf("\n\ncoup de spas12 dans sa mère : -%d hp pour le Kernel-Boss\n\n", attack_random)
 						b1.hp = b1.hp - attack_random
 						if b1.hp <= 0 {
@@ -160,7 +160,7 @@ func main() {
 						}
 						fmt.Printf("\n\nATTENTION, le Kernel-Boss attaque !\n\n")
 						time.Sleep(3000 * time.Millisecond)
-						attack_random_b1 := rand.Intn(30)
+						attack_random_b1 := rand.Intn(b1.attack)
 						p1.hp = p1.hp - attack_random_b1
 						fmt.Printf("Kernel-Boss damage : %d", attack_random_b1)
 						if p1.hp <= 0 {
